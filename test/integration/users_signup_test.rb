@@ -10,6 +10,9 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                               password_confirmation: "baar"}
     end
     assert_template 'users/new'
+    assert_select 'div#error_explanation'
+    assert_select 'div.field_with_errors'
+    assert_select 'div.alert'
   end
 
   test "valid signup information" do
@@ -21,5 +24,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                             password_confirmation: "password"}
     end
     assert_template 'users/show'
+    assert is_logged_in?
   end
 end
